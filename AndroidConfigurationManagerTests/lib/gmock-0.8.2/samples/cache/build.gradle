@@ -1,0 +1,13 @@
+apply plugin: 'groovy'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    groovy "org.codehaus.groovy:groovy-all:1.8.4"
+    compile 'hsqldb:hsqldb:1.8.0.7'
+    testCompile 'junit:junit:4.5',
+                'org.hamcrest:hamcrest-library:1.1',
+                files('../../gmock-0.8.2.jar')
+}

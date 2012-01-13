@@ -1,0 +1,13 @@
+apply plugin: 'groovy'
+
+repositories {
+    mavenCentral()
+}   
+
+dependencies {
+    groovy "org.codehaus.groovy:groovy-all:1.8.4"
+    testCompile 'org.testng:testng:5.8:jdk15',
+                files('../../gmock-0.8.2.jar')
+}
+
+tasks.test.useTestNG()

@@ -1,0 +1,38 @@
+apply plugin: 'groovy'
+apply plugin: 'maven'
+apply plugin: 'idea'
+
+group = 'com.sky.popcorn'
+artifactId = 'popcorn-model'
+version = "1.0.${new Date().format('yyMMdd.HHmm')}"
+
+sourceCompatibility = 1.6
+targetCompatibility = 1.6
+
+repositories {
+
+	mavenLocal()
+	mavenCentral()
+
+	mavenRepo(url: 'http://build.mnetcs.com:8081/artifactory/nzbair-snapshot')
+}
+
+dependencies {
+
+	groovy "org.codehaus.groovy:groovy-all:1.8.5"
+
+	compile 'commons-lang:commons-lang:2.6'
+
+	testCompile "org.gmock:gmock:0.8.2"
+	testCompile "org.spockframework:spock-core:0.5-groovy-1.8"
+}
+
+uploadArchives {
+	repositories.mavenDeployer {
+		name = 'httpDeployer'
+		repository(url: "http://build.mnetcs.com:8081/artifactory/nzbair-snapshot") {
+			authentication(userName: System.properties['artifactoryUserName'], password: System.properties['artifactoryPassword'])
+		}
+		pom.artifactId = artifactId
+	}
+}
