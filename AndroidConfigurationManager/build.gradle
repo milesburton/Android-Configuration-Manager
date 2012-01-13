@@ -1,0 +1,68 @@
+apply plugin: 'groovy'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+
+group = 'com.mb.android'
+artifactId = 'android-common'
+version = "1.0.${new Date().format('yyMMdd.HHmm')}"
+
+sourceCompatibility = 1.6
+targetCompatibility = 1.6
+
+sourceSets {
+    testCompile {
+        groovy {
+            srcDir file('src/test/groovy')
+        }
+    }
+}
+
+buildscript {
+   dependencies {
+        classpath files('bin/androidconfigurationmanager.jar')
+
+    }
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+
+   mavenRepo(url: 'http://build.mnetcs.com:8081/artifactory/nzbair-snapshot')
+}
+
+dependencies {
+   	groovy "org.codehaus.groovy:groovy-all:1.8.5"
+
+	compile 'com.google.android:android:2.3.3',
+		'com.mb.android:android-common:1.0-SNAPSHOT'
+
+	testCompile 	"org.spockframework:spock-core:0.5-groovy-1.8",
+			"junit:junit:4.10",
+			 "org.mockito:mockito-all:1.9.0-rc1",	
+			 "org.powermock:powermock-module-junit4:1.4.10",
+			 "org.powermock:powermock-api-mockito:1.4.10",
+			'org.gmock:gmock:0.8.2'
+}
+
+/* The test script helpers */
+test {
+    System.properties /* pass the environment vars to the test script*/
+
+    include 'com/mb/android/preferences/**'
+
+    beforeTest { descriptor ->
+        logger.lifecycle("Running test: " + descriptor)
+    }
+}
+
+uploadArchives {
+
+    repositories.mavenDeployer {
+        name = 'httpDeployer'
+        repository(url: "http://buildrepo.popcorn.bskyb.com/artifactory/popcorn-snapshot") {
+            authentication(userName: System.properties['artifactoryUserName'], password: System.properties['artifactoryPassword'])
+        }
+        pom.artifactId = artifactId
+    }
+}
