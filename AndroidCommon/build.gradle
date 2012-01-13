@@ -13,7 +13,7 @@ repositories {
     mavenLocal()
     mavenCentral()
 
-    mavenRepo(url: 'http://buildrepo.popcorn.bskyb.com/artifactory/nzbair-snapshot')
+   mavenRepo(url: 'http://build.mnetcs.com:8081/artifactory/nzbair-snapshot')
 }
 
 dependencies {
@@ -21,11 +21,11 @@ dependencies {
 }
 
 uploadArchives {
-    repositories.mavenDeployer {
-        name = 'httpDeployer'
-        repository(url: "http://buildrepo.popcorn.bskyb.com/artifactory/nzbair-snapshot") {
-            authentication(userName: System.properties['artifactoryUserName'], password: System.properties['artifactoryPassword'])
-        }
-        pom.artifactId = artifactId
-    }
+	repositories.mavenDeployer {
+		name = 'httpDeployer'
+		repository(url: "http://build.mnetcs.com:8081/artifactory/nzbair-snapshot") {
+			authentication(userName: System.properties['artifactoryUserName'], password: System.properties['artifactoryPassword'])
+		}
+		pom.artifactId = artifactId
+	}
 }
