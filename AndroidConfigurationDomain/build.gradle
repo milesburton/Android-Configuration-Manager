@@ -2,8 +2,8 @@ apply plugin: 'groovy'
 apply plugin: 'maven'
 apply plugin: 'idea'
 
-group = 'com.sky.popcorn'
-artifactId = 'popcorn-model'
+group = 'com.mb.android.preferences'
+artifactId = 'android-configuration-domain'
 version = "1.0.${new Date().format('yyMMdd.HHmm')}"
 
 sourceCompatibility = 1.6
