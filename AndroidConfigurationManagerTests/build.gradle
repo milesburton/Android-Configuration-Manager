@@ -13,11 +13,6 @@ sourceSets {
     }
 }
 
-dependencies {
-	compile files('../AndroidConfigurationManager/bin/androidconfigurationmanager.jar')
-}
-
-
 repositories {
 	mavenCentral()
 	mavenRepo(url: 'http://build.mnetcs.com:8081/artifactory/android-snapshot')
@@ -27,8 +22,8 @@ dependencies {
    	groovy "org.codehaus.groovy:groovy-all:1.8.5"
 
 	compile 'com.google.android:android:2.3.3',
-		'com.mb.android.preferences:android-configuration-domain:1.0-SNAPSHOT',
-		'com.mb.android.common:android-common:1.0-SNAPSHOT'
+		'com.mb.android.preferences:android-configuration-manager:1.0-SNAPSHOT',
+
 
 
 	testCompile 	"org.spockframework:spock-core:0.5-groovy-1.8",
