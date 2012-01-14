@@ -2,7 +2,7 @@ apply plugin: 'groovy'
 apply plugin: 'maven'
 apply plugin: 'idea'
 
-group = 'com.mb.android'
+group = 'com.mb.android.common'
 artifactId = 'android-common'
 //version = "1.0.${new Date().format('yyMMdd.HHmm')}"
 version = "1.0-SNAPSHOT"

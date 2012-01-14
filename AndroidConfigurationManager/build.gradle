@@ -6,7 +6,7 @@ apply plugin: 'maven'
 group = 'com.mb.android'
 artifactId = 'android-configuration-manager'
 //version = "1.0.${new Date().format('yyMMdd.HHmm')}"
-version = "1.0.SNAPSHOT"
+version = "1.0-SNAPSHOT"
 
 sourceCompatibility = 1.6
 targetCompatibility = 1.6
@@ -27,7 +27,7 @@ buildscript {
 }
 
 repositories {
-    mavenLocal()
+    //mavenLocal()
     mavenCentral()
 
    mavenRepo(url: 'http://build.mnetcs.com:8081/artifactory/nzbair-snapshot')
@@ -37,8 +37,9 @@ dependencies {
    	groovy "org.codehaus.groovy:groovy-all:1.8.5"
 
 	compile 'com.google.android:android:2.3.3',
-		'com.mb.android:android-common:1.0-SNAPSHOT',
-		'com.mb.android.preferences:android-configuration-domain:1.0-SNAPSHOT'
+		'com.mb.android.preferences:android-configuration-domain:1.0-SNAPSHOT',
+		'com.mb.android:android-common:1.0-SNAPSHOT'
+
 
 	testCompile 	"org.spockframework:spock-core:0.5-groovy-1.8",
 			"junit:junit:4.10",
