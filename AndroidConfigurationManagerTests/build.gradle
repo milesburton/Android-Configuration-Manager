@@ -20,7 +20,7 @@ dependencies {
 
 repositories {
 	mavenCentral()
-	mavenRepo(url: 'http://build.mnetcs.com:8081/artifactory/nzbair-snapshot')
+	mavenRepo(url: 'http://build.mnetcs.com:8081/artifactory/android-snapshot')
 }
 
 dependencies {

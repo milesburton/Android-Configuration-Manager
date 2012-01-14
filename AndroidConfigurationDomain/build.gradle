@@ -15,7 +15,7 @@ repositories {
 	mavenLocal()
 	mavenCentral()
 
-	mavenRepo(url: 'http://build.mnetcs.com:8081/artifactory/nzbair-snapshot')
+	mavenRepo(url: 'http://build.mnetcs.com:8081/artifactory/android-snapshot')
 }
 
 dependencies {
@@ -31,7 +31,7 @@ dependencies {
 uploadArchives {
 	repositories.mavenDeployer {
 		name = 'httpDeployer'
-		repository(url: "http://build.mnetcs.com:8081/artifactory/nzbair-snapshot") {
+		repository(url: "http://build.mnetcs.com:8081/artifactory/android-snapshot") {
 			authentication(userName: System.properties['artifactoryUserName'], password: System.properties['artifactoryPassword'])
 		}
 		pom.artifactId = artifactId
