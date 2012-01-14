@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite errors="0" failures="0" hostname="Yosemite" name="com.mb.android.preferences.reflection.FieldReflectorSpec" tests="1" time="0.046" timestamp="2012-01-14T00:38:43">
+  <properties />
+  <testcase classname="com.mb.android.preferences.reflection.FieldReflectorSpec" name="Given a MockClass with four fields I then four fields are returned" time="0.039" />
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

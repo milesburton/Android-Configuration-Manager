@@ -8,8 +8,8 @@ artifactId = 'android-configuration-manager'
 //version = "1.0.${new Date().format('yyMMdd.HHmm')}"
 version = "1.0-SNAPSHOT"
 
-sourceCompatibility = 1.6
-targetCompatibility = 1.6
+sourceCompatibility = 1.5
+targetCompatibility = 1.5
 
 sourceSets {
     testCompile {
@@ -38,7 +38,7 @@ dependencies {
 
 	compile 'com.google.android:android:2.3.3',
 		'com.mb.android.preferences:android-configuration-domain:1.0-SNAPSHOT',
-		'com.mb.android:android-common:1.0-SNAPSHOT'
+		'com.mb.android.common:android-common:1.0-SNAPSHOT'
 
 
 	testCompile 	"org.spockframework:spock-core:0.5-groovy-1.8",
