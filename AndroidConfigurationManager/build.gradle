@@ -2,27 +2,36 @@ apply plugin: 'android'
 apply plugin: 'maven'
 apply plugin: 'idea'
 
+group = 'com.mb.android.preferences'
+artifactId = 'android-common'
+//version = "1.0.${new Date().format('yyMMdd.HHmm')}"
+version = "1.0-SNAPSHOT"
 
 sourceCompatibility = 1.5
 targetCompatibility = 1.5
 
 repositories {
-	mavenCentral()
-	mavenRepo(url: 'http://build.mnetcs.com:8081/artifactory/nzbair-snapshot')
+    mavenCentral()
+    mavenRepo(url: 'http://build.mnetcs.com:8081/artifactory/nzbair-snapshot')
 }
 buildscript {
-	repositories {
-		mavenCentral()
-	}
-	dependencies {
-		classpath 'org.gradle.api.plugins:gradle-android-plugin:1.1.0'
-	}
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'org.gradle.api.plugins:gradle-android-plugin:1.1.0'
+    }
 }
 
 dependencies {
-	compile 'com.google.android:android:2.3.3',
-		'com.mb.android.preferences:android-configuration-domain:1.0-SNAPSHOT',
-		'com.mb.android.common:android-common:1.0-SNAPSHOT'
+    compile 'com.google.android:android:2.3.3',
+            compile('com.mb.android.preferences:android-configuration-domain:1.0-SNAPSHOT') {
+                changing = true
+            }
+
+    compile('com.mb.android.common:android-common:1.0-SNAPSHOT') {
+        changing = true
+    }
 }
 
 
@@ -30,4 +39,12 @@ repositories {
     mavenCentral()
 }
 
-
+uploadArchives {
+	repositories.mavenDeployer {
+		name = 'httpDeployer'
+		repository(url: "http://build.mnetcs.com:8081/artifactory/nzbair-snapshot") {
+			authentication(userName: System.properties['artifactoryUserName'], password: System.properties['artifactoryPassword'])
+		}
+		pom.artifactId = artifactId
+	}
+}

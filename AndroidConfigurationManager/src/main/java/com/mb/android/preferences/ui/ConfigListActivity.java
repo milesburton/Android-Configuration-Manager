@@ -1,23 +1,14 @@
 package com.mb.android.preferences.ui;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import android.app.ListActivity;
 import android.os.Bundle;
-import android.view.ContextMenu;
+import android.view.*;
 import android.view.ContextMenu.ContextMenuInfo;
-import android.view.LayoutInflater;
-import android.view.MenuItem;
-import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.mb.android.preferences.R;
 import com.mb.android.preferences.domain.Config;
 import com.mb.android.preferences.manager.ConfigFilter;
@@ -26,164 +17,168 @@ import com.mb.android.preferences.manager.OnConfigLoadedListener;
 import com.mb.android.ui.listeners.CustomClickListener;
 import com.mb.android.ui.listeners.OnCustomClickListener;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 public abstract class ConfigListActivity extends ListActivity implements OnCustomClickListener<Config>, OnClickListener {
-	private final static int BTN_ADD_NEW = 1337;
+    private final static int BTN_ADD_NEW = 1337;
 
-	private final ConfigFilter filter;
+    private final ConfigFilter filter;
 
-	private List<Config> configList;
+    private List<Config> configList;
 
-	private ConfigManager configManager;
-	private Config selectedConfig = null;
+    private ConfigManager configManager;
+    private Config selectedConfig = null;
 
-	public ConfigListActivity(ConfigFilter filter, ConfigManager configManager) {
-		this.filter = filter;
-		this.configManager = configManager;
-	}
+    public ConfigListActivity(ConfigFilter filter, ConfigManager configManager) {
+        this.filter = filter;
+        this.configManager = configManager;
+    }
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-		configList = getConfigList();
+        configList = getConfigList();
 
-		ProviderListAdapter adapter = new ProviderListAdapter();
-		setContentView(R.layout.activity_list);
-		Button button = new Button(this);
-		button.setId(BTN_ADD_NEW);
-		button.setText("Add new");
-		button.setOnClickListener(this);
-		getListView().addFooterView(button);
+        ProviderListAdapter adapter = new ProviderListAdapter();
+        setContentView(R.layout.activity_list);
+        Button button = new Button(this);
+        button.setId(BTN_ADD_NEW);
+        button.setText("Add new");
+        button.setOnClickListener(this);
+        getListView().addFooterView(button);
 
-		setListAdapter(adapter);
+        setListAdapter(adapter);
 
-		configManager.listenForConfigLoaded(adapter);
-	}
+        configManager.listenForConfigLoaded(adapter);
+    }
 
-	private List<Config> getConfigList() {
-		return new ArrayList<Config>(configManager.getConfigurationFor(filter).values());
-	}
+    private List<Config> getConfigList() {
+        return new ArrayList<Config>(configManager.getConfigurationFor(filter).values());
+    }
 
-	@Override
-	public void OnClick(View view, int position, Config providerConfig) {
-		if (view.getId() == R.id.toggle_default_icon) {
 
-			onDefaultSelected(providerConfig);
-		} else {
-			onConfigSelected(providerConfig);
-		}
-	}
+    public void OnClick(View view, int position, Config providerConfig) {
+        if (view.getId() == R.id.toggle_default_icon) {
 
-	@Override
-	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
-		onConfigContextMenu(menu, v, menuInfo);
-	}
+            onDefaultSelected(providerConfig);
+        } else {
+            onConfigSelected(providerConfig);
+        }
+    }
 
-	@Override
-	public boolean onContextItemSelected(MenuItem item) {
-		if (selectedConfig != null)
-			onConfigDeleted(selectedConfig);
-		return true;
-	}
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
+        onConfigContextMenu(menu, v, menuInfo);
+    }
 
-	private class ProviderListAdapter extends BaseAdapter implements OnConfigLoadedListener {
-		private LayoutInflater mInflater;
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        if (selectedConfig != null)
+            onConfigDeleted(selectedConfig);
+        return true;
+    }
 
-		public ProviderListAdapter() {
-			mInflater = LayoutInflater.from(ConfigListActivity.this);
-		}
+    private class ProviderListAdapter extends BaseAdapter implements OnConfigLoadedListener {
+        private LayoutInflater mInflater;
 
-		@Override
-		public int getCount() {
-			return configList.size();
-		}
+        public ProviderListAdapter() {
+            mInflater = LayoutInflater.from(ConfigListActivity.this);
+        }
 
-		@Override
-		public Object getItem(int arg0) {
-			return configList.get(arg0);
-		}
 
-		@Override
-		public long getItemId(int arg0) {
-			return 0;
-		}
+        public int getCount() {
+            return configList.size();
+        }
 
-		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
-			ViewHolder holder;
-			if (convertView == null) {
-				convertView = mInflater.inflate(R.layout.listview_row_preference_config, null);
-				convertView.setOnCreateContextMenuListener(ConfigListActivity.this);
-				holder = new ViewHolder();
-				holder.title = (TextView) convertView.findViewById(R.id.title);
-				holder.toggleDefaultIcon = (ImageView) convertView.findViewById(R.id.toggle_default_icon);
-				convertView.setTag(holder);
-			} else {
-				holder = (ViewHolder) convertView.getTag();
-			}
 
-			Config provider = (Config) getItem(position);
+        public Object getItem(int arg0) {
+            return configList.get(arg0);
+        }
 
-			CustomClickListener<Config> handler = new CustomClickListener<Config>(ConfigListActivity.this, position, provider);
 
-			holder.title.setText(provider.getName());
-			holder.toggleDefaultIcon.setOnClickListener(handler);
+        public long getItemId(int arg0) {
+            return 0;
+        }
 
-			if (isDefaultConfig(provider)) {
-				holder.toggleDefaultIcon.setImageResource(android.R.drawable.star_on);
-			} else {
-				holder.toggleDefaultIcon.setImageResource(android.R.drawable.star_off);
-			}
 
-			convertView.setOnTouchListener(handler);
-			convertView.setOnClickListener(handler);
-			convertView.setOnCreateContextMenuListener(ConfigListActivity.this);
+        public View getView(int position, View convertView, ViewGroup parent) {
+            ViewHolder holder;
+            if (convertView == null) {
+                convertView = mInflater.inflate(R.layout.listview_row_preference_config, null);
+                convertView.setOnCreateContextMenuListener(ConfigListActivity.this);
+                holder = new ViewHolder();
+                holder.title = (TextView) convertView.findViewById(R.id.title);
+                holder.toggleDefaultIcon = (ImageView) convertView.findViewById(R.id.toggle_default_icon);
+                convertView.setTag(holder);
+            } else {
+                holder = (ViewHolder) convertView.getTag();
+            }
 
-			return convertView;
-		}
+            Config provider = (Config) getItem(position);
 
-		@Override
-		public void configLoaded(Map<String, Config> configuration) {
-			configList = getConfigList();
-			notifyDataSetChanged();
-		}
+            CustomClickListener<Config> handler = new CustomClickListener<Config>(ConfigListActivity.this, position, provider);
 
-	}
+            holder.title.setText(provider.getName());
+            holder.toggleDefaultIcon.setOnClickListener(handler);
 
-	private static class ViewHolder {
-		private TextView title;
-		private ImageView toggleDefaultIcon;
-	}
+            if (isDefaultConfig(provider)) {
+                holder.toggleDefaultIcon.setImageResource(android.R.drawable.star_on);
+            } else {
+                holder.toggleDefaultIcon.setImageResource(android.R.drawable.star_off);
+            }
 
-	@Override
-	public void OnTouch(View aView, int position, Config payload) {
-		selectedConfig = payload;
-	}
+            convertView.setOnTouchListener(handler);
+            convertView.setOnClickListener(handler);
+            convertView.setOnCreateContextMenuListener(ConfigListActivity.this);
 
-	@Override
-	public void OnLongClick(View aView, int position, Config payload) {
+            return convertView;
+        }
 
-	}
 
-	@Override
-	public void onClick(View view) {
-		switch (view.getId()) {
-		case BTN_ADD_NEW:
-			onAddConfig();
-			break;
-		}
-	}
+        public void configLoaded(Map<String, Config> configuration) {
+            configList = getConfigList();
+            notifyDataSetChanged();
+        }
 
-	public abstract void onAddConfig();
+    }
 
-	public abstract boolean isDefaultConfig(Config config);
+    private static class ViewHolder {
+        private TextView title;
+        private ImageView toggleDefaultIcon;
+    }
 
-	public abstract void onDefaultSelected(Config config);
 
-	public abstract void onConfigSelected(Config config);
+    public void OnTouch(View aView, int position, Config payload) {
+        selectedConfig = payload;
+    }
 
-	public abstract void onConfigDeleted(Config config);
 
-	public abstract void onConfigContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo);
+    public void OnLongClick(View aView, int position, Config payload) {
+
+    }
+
+
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case BTN_ADD_NEW:
+                onAddConfig();
+                break;
+        }
+    }
+
+    public abstract void onAddConfig();
+
+    public abstract boolean isDefaultConfig(Config config);
+
+    public abstract void onDefaultSelected(Config config);
+
+    public abstract void onConfigSelected(Config config);
+
+    public abstract void onConfigDeleted(Config config);
+
+    public abstract void onConfigContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo);
 
 }

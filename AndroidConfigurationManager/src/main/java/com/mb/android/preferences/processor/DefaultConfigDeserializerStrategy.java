@@ -5,21 +5,21 @@ import com.mb.android.preferences.persistance.ConfigDeserialiser;
 
 public class DefaultConfigDeserializerStrategy extends ConfigProcessorStrategy {
 
-	final private Config config;
+    final private Config config;
 
-	public DefaultConfigDeserializerStrategy(ConfigDeserialiser configSerialiser, Config config) {
-		super(configSerialiser);
-		this.config = config;
-	}
+    public DefaultConfigDeserializerStrategy(ConfigDeserialiser configSerialiser, Config config) {
+        super(configSerialiser);
+        this.config = config;
+    }
 
-	@Override
-	public String getSupportedConfigType() {
-		return config.getClass().getCanonicalName();
-	}
+    @Override
+    public String getSupportedConfigType() {
+        return config.getClass().getCanonicalName();
+    }
 
-	@Override
-	public Config getConfig(String id) {
-		return getConfigDeserialiser().deserialise((Config) config.clone(), id);
-	}
+    @Override
+    public Config getConfig(String id) {
+        return getConfigDeserialiser().deserialise((Config) config.clone(), id);
+    }
 
 }

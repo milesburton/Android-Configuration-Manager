@@ -1,12 +1,7 @@
 package com.mb.android.preferences.ui;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
-
 import android.preference.ListPreference;
 import android.preference.Preference;
-
 import com.mb.android.preferences.annotations.ConfigDescription;
 import com.mb.android.preferences.annotations.ConfigMetadata;
 import com.mb.android.preferences.annotations.ConfigOption;
@@ -16,83 +11,87 @@ import com.mb.android.preferences.persistance.KeyGenerator;
 import com.mb.android.preferences.reflection.ConfigMetadataReflector;
 import com.mb.android.preferences.reflection.ConfigMetadataReflector.ConfigValueAction;
 
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
+
 public class UIPreferenceBuilder {
-	private KeyGenerator keyGenerator = new KeyGenerator();
-	private PreferenceFactory preferenceFactory = null;
+    private KeyGenerator keyGenerator = new KeyGenerator();
+    private PreferenceFactory preferenceFactory = null;
 
-	public List<Preference> getPreferencesFor(final Config config) {
-		final List<Preference> preferences = new ArrayList<Preference>();
+    public List<Preference> getPreferencesFor(final Config config) {
+        final List<Preference> preferences = new ArrayList<Preference>();
 
-		ConfigMetadataReflector configMetadataReflector = new ConfigMetadataReflector();
+        ConfigMetadataReflector configMetadataReflector = new ConfigMetadataReflector();
 
-		ConfigValueAction putEditorAction = new ConfigValueAction() {
+        ConfigValueAction putEditorAction = new ConfigValueAction() {
 
-			@Override
-			public void process(Field field, ConfigMetadata configMetadata) {
-				ConfigDescription configDescription = getConfigDescription(field);
-				Preference preference = getPreferenceFor(config, configMetadata, configDescription);
-				populateDefaults(field, preference);
-				preferences.add(preference);
-			}
-		};
 
-		configMetadataReflector.processMetadata(config, putEditorAction);
-		return preferences;
-	}
+            public void process(Field field, ConfigMetadata configMetadata) {
+                ConfigDescription configDescription = getConfigDescription(field);
+                Preference preference = getPreferenceFor(config, configMetadata, configDescription);
+                populateDefaults(field, preference);
+                preferences.add(preference);
+            }
+        };
 
-	private ConfigDescription getConfigDescription(Field field) {
-		ConfigDescription fieldDescription = (ConfigDescription) field.getAnnotation(ConfigDescription.class);
+        configMetadataReflector.processMetadata(config, putEditorAction);
+        return preferences;
+    }
 
-		if (fieldDescription == null)
-			throw new MissingAnnotationException();
-		return fieldDescription;
-	}
+    private ConfigDescription getConfigDescription(Field field) {
+        ConfigDescription fieldDescription = (ConfigDescription) field.getAnnotation(ConfigDescription.class);
 
-	private Preference getPreferenceFor(Config config, ConfigMetadata configMetadata, ConfigDescription fieldDescription) {
-		String key = keyGenerator.createKey(config.getId(), configMetadata.id()); // this is wrong! shouldn't know about a key generator
+        if (fieldDescription == null)
+            throw new MissingAnnotationException();
+        return fieldDescription;
+    }
 
-		Preference preference = preferenceFactory.createPreference(configMetadata);
+    private Preference getPreferenceFor(Config config, ConfigMetadata configMetadata, ConfigDescription fieldDescription) {
+        String key = keyGenerator.createKey(config.getId(), configMetadata.id()); // this is wrong! shouldn't know about a key generator
 
-		preference.setKey(key);
-		preference.setTitle(fieldDescription.title());
-		if (!"".equals(fieldDescription.description()))
-			preference.setSummary(fieldDescription.description());
+        Preference preference = preferenceFactory.createPreference(configMetadata);
 
-		return preference;
-	}
+        preference.setKey(key);
+        preference.setTitle(fieldDescription.title());
+        if (!"".equals(fieldDescription.description()))
+            preference.setSummary(fieldDescription.description());
 
-	private void populateDefaults(Field field, Preference preference) {
-		if (preference instanceof ListPreference)
-			populateDefaults(field, (ListPreference) preference);
-	}
+        return preference;
+    }
 
-	private void populateDefaults(Field field, ListPreference preference) {
-		ConfigOptions configOptions = (ConfigOptions) field.getAnnotation(ConfigOptions.class);
-		if (configOptions == null)
-			return;
+    private void populateDefaults(Field field, Preference preference) {
+        if (preference instanceof ListPreference)
+            populateDefaults(field, (ListPreference) preference);
+    }
 
-		String[] titleArray = new String[configOptions.values().length];
-		String[] valueArray = new String[configOptions.values().length];
+    private void populateDefaults(Field field, ListPreference preference) {
+        ConfigOptions configOptions = (ConfigOptions) field.getAnnotation(ConfigOptions.class);
+        if (configOptions == null)
+            return;
 
-		for (int i = 0; i < configOptions.values().length; i++) {
-			ConfigOption configOption = configOptions.values()[i];
-			titleArray[i] = configOption.title();
-			valueArray[i] = configOption.value();
-		}
+        String[] titleArray = new String[configOptions.values().length];
+        String[] valueArray = new String[configOptions.values().length];
 
-		preference.setEntries(titleArray);
-		preference.setEntryValues(valueArray);
-	}
+        for (int i = 0; i < configOptions.values().length; i++) {
+            ConfigOption configOption = configOptions.values()[i];
+            titleArray[i] = configOption.title();
+            valueArray[i] = configOption.value();
+        }
 
-	public void setPreferenceFactory(PreferenceFactory preferenceFactory) {
-		this.preferenceFactory = preferenceFactory;
-	}
+        preference.setEntries(titleArray);
+        preference.setEntryValues(valueArray);
+    }
 
-	public interface PreferenceFactory {
-		Preference createPreference(ConfigMetadata metadata);
-	}
+    public void setPreferenceFactory(PreferenceFactory preferenceFactory) {
+        this.preferenceFactory = preferenceFactory;
+    }
 
-	public static class MissingAnnotationException extends RuntimeException {
-		private static final long serialVersionUID = 1922639213002486492L;
-	}
+    public interface PreferenceFactory {
+        Preference createPreference(ConfigMetadata metadata);
+    }
+
+    public static class MissingAnnotationException extends RuntimeException {
+        private static final long serialVersionUID = 1922639213002486492L;
+    }
 }

@@ -1,9 +1,9 @@
 package com.mb.android.preferences.manager;
 
-import java.util.Map;
-
 import com.mb.android.preferences.domain.Config;
 
+import java.util.Map;
+
 public interface OnConfigLoadedListener {
-	void configLoaded(Map<String, Config> configuration);
+    void configLoaded(Map<String, Config> configuration);
 }
