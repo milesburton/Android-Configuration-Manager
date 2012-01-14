@@ -3,7 +3,7 @@ apply plugin: 'maven'
 apply plugin: 'idea'
 
 group = 'com.mb.android.preferences'
-artifactId = 'android-common'
+artifactId = 'android-configuration-manager'
 //version = "1.0.${new Date().format('yyMMdd.HHmm')}"
 version = "1.0-SNAPSHOT"
 

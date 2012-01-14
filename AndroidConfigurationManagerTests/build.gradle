@@ -22,7 +22,7 @@ dependencies {
    	groovy "org.codehaus.groovy:groovy-all:1.8.5"
 
 	compile 'com.google.android:android:2.3.3',
-		'com.mb.android.preferences:android-configuration-manager:1.0-SNAPSHOT',
+		'com.mb.android.preferences:android-configuration-manager:1.0-SNAPSHOT'
 
 
 
