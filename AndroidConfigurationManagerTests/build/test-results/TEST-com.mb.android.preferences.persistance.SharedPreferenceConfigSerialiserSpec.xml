@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite errors="0" failures="0" hostname="Yosemite" name="com.mb.android.preferences.persistance.SharedPreferenceConfigSerialiserSpec" tests="2" time="0.408" timestamp="2012-01-14T16:37:57">
+  <properties />
+  <testcase classname="com.mb.android.preferences.persistance.SharedPreferenceConfigSerialiserSpec" name="given an invalid config the serialiser throws an exception" time="0.219" />
+  <testcase classname="com.mb.android.preferences.persistance.SharedPreferenceConfigSerialiserSpec" name="given a configuration object a representation should be stored in a shared preference" time="0.183" />
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
