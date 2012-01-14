@@ -21,8 +21,12 @@ repositories {
 dependencies {
    	groovy "org.codehaus.groovy:groovy-all:1.8.5"
 
-	compile 'com.google.android:android:2.3.3',
-		'com.mb.android.preferences:android-configuration-manager:1.0-SNAPSHOT'
+	compile 'com.google.android:android:2.3.3'
+	compile('com.mb.android.preferences:android-configuration-manager:1.0-SNAPSHOT')
+	{
+		changing = true
+	}
+
 
 
 
