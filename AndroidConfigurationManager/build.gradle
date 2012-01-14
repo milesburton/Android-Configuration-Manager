@@ -1,10 +1,12 @@
 apply plugin: 'groovy'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
+apply plugin: 'maven'
 
 group = 'com.mb.android'
-artifactId = 'android-common'
-version = "1.0.${new Date().format('yyMMdd.HHmm')}"
+artifactId = 'android-configuration-manager'
+//version = "1.0.${new Date().format('yyMMdd.HHmm')}"
+version = "1.0.SNAPSHOT"
 
 sourceCompatibility = 1.6
 targetCompatibility = 1.6
@@ -35,13 +37,11 @@ dependencies {
    	groovy "org.codehaus.groovy:groovy-all:1.8.5"
 
 	compile 'com.google.android:android:2.3.3',
-		'com.mb.android:android-common:1.0-SNAPSHOT'
+		'com.mb.android:android-common:1.0-SNAPSHOT',
+		'com.mb.android.preferences:android-configuration-domain:1.0-SNAPSHOT'
 
 	testCompile 	"org.spockframework:spock-core:0.5-groovy-1.8",
 			"junit:junit:4.10",
-			 "org.mockito:mockito-all:1.9.0-rc1",	
-			 "org.powermock:powermock-module-junit4:1.4.10",
-			 "org.powermock:powermock-api-mockito:1.4.10",
 			'org.gmock:gmock:0.8.2'
 }
 
@@ -57,12 +57,11 @@ test {
 }
 
 uploadArchives {
-
-    repositories.mavenDeployer {
-        name = 'httpDeployer'
-        repository(url: "http://buildrepo.popcorn.bskyb.com/artifactory/popcorn-snapshot") {
-            authentication(userName: System.properties['artifactoryUserName'], password: System.properties['artifactoryPassword'])
-        }
-        pom.artifactId = artifactId
-    }
+	repositories.mavenDeployer {
+		name = 'httpDeployer'
+		repository(url: "http://build.mnetcs.com:8081/artifactory/nzbair-snapshot") {
+			authentication(userName: System.properties['artifactoryUserName'], password: System.properties['artifactoryPassword'])
+		}
+		pom.artifactId = artifactId
+	}
 }
