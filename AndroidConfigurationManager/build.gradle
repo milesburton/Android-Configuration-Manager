@@ -1,6 +1,7 @@
 apply plugin: 'android'
 apply plugin: 'maven'
 apply plugin: 'idea'
+apply plugin: 'eclipse'
 
 group = 'com.mb.android.preferences'
 artifactId = 'android-configuration-manager'
@@ -24,12 +25,12 @@ buildscript {
 }
 
 dependencies {
-    compile 'com.google.android:android:2.3.3',
-            compile('com.mb.android.preferences:android-configuration-domain:1.0-SNAPSHOT') {
-                changing = true
-            }
+    compile('com.mb.android.preferences:android-configuration-domain:1.0-SNAPSHOT') {
+        changing = true
+    }
 
     compile('com.mb.android.common:android-common:1.0-SNAPSHOT') {
+	exclude module: 'android'
         changing = true
     }
 }
@@ -37,6 +38,11 @@ dependencies {
 
 repositories {
     mavenCentral()
+}
+
+// Configure the filtering of resources with properties from the Gradle's project scope (2)
+processResources {
+  expand (project.properties)
 }
 
 uploadArchives {
