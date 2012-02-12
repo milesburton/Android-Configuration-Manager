@@ -14,5 +14,7 @@
 			<accessrule kind="nonaccessible" pattern="com/android/internal/**"/>
 		</accessrules>
 	</classpathentry>
+	<classpathentry combineaccessrules="false" kind="src" path="/com_actionbarsherlock"/>
+	<classpathentry kind="lib" path="/home/miles/workspace/AirCollection/Android-Configuration-Manager/ThirdParty/actionbarsherlock-plugin-preference-3.5.0.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

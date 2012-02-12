@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite errors="0" failures="0" hostname="Yosemite" name="com.mb.android.preferences.processor.DefaultConfigDeserializerStrategySpec" tests="2" time="0.587" timestamp="2012-01-14T16:37:56">
+<testsuite errors="0" failures="0" hostname="Yosemite" name="com.mb.android.preferences.processor.DefaultConfigDeserializerStrategySpec" tests="2" time="0.602" timestamp="2012-02-11T12:12:17">
   <properties />
-  <testcase classname="com.mb.android.preferences.processor.DefaultConfigDeserializerStrategySpec" name="given an id expect getConfig to return a populated config with the associated id" time="0.079" />
+  <testcase classname="com.mb.android.preferences.processor.DefaultConfigDeserializerStrategySpec" name="given an id expect getConfig to return a populated config with the associated id" time="0.1" />
   <testcase classname="com.mb.android.preferences.processor.DefaultConfigDeserializerStrategySpec" name="given a TestConfig concrete type the supported config type is TestConfig" time="0.0020" />
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>

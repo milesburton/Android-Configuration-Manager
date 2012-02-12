@@ -14,6 +14,7 @@ targetCompatibility = 1.6
 repositories {
     mavenCentral()
     mavenRepo(url: 'http://build.mnetcs.com:8081/artifactory/android-snapshot')
+	mavenRepo(url: 'http://r.jakewharton.com/maven/release')
 }
 buildscript {
     repositories {
@@ -25,6 +26,8 @@ buildscript {
 }
 
 dependencies {
+	
+	compile('com.actionbarsherlock:plugin-preference:3.5.0')
     compile('com.mb.android.preferences:android-configuration-domain:1.0-SNAPSHOT') {
         changing = true
     }
