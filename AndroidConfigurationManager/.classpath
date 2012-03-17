@@ -3,18 +3,10 @@
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry kind="src" path="src/main/java"/>
 	<classpathentry kind="src" path="gen"/>
-	<classpathentry exported="true" kind="lib" path="/home/miles/.gradle/caches/artifacts-7/artifacts/43e6262bee846d5d45a2f9bc63918fd2/com.mb.android.preferences/android-configuration-domain/1.0-SNAPSHOT/jar/android-configuration-domain-1.0-SNAPSHOT.jar" sourcepath="/home/miles/workspace/AirCollection/Android-Configuration-Manager/AndroidConfigurationDomain"/>
-	<classpathentry exported="true" kind="lib" path="/home/miles/.gradle/caches/artifacts-7/artifacts/43e6262bee846d5d45a2f9bc63918fd2/com.mb.android.common/android-common/1.0-SNAPSHOT/jar/android-common-1.0-SNAPSHOT.jar"/>
-	<classpathentry exported="true" kind="lib" path="/home/miles/.gradle/caches/artifacts-7/artifacts/56865c09425cc6ecda8606d7e6035ceb/commons-lang/commons-lang/2.6/jar/commons-lang-2.6.jar" sourcepath="/home/miles/.gradle/caches/artifacts-7/artifacts/56865c09425cc6ecda8606d7e6035ceb/commons-lang/commons-lang/2.6/source/commons-lang-2.6-sources.jar"/>
-	<classpathentry kind="lib" path="/home/miles/android-sdk-linux_x86/platforms/android-13/android.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="http://developer.android.com/reference/"/>
-		</attributes>
-		<accessrules>
-			<accessrule kind="nonaccessible" pattern="com/android/internal/**"/>
-		</accessrules>
-	</classpathentry>
 	<classpathentry combineaccessrules="false" kind="src" path="/com_actionbarsherlock"/>
-	<classpathentry kind="lib" path="/home/miles/workspace/AirCollection/Android-Configuration-Manager/ThirdParty/actionbarsherlock-plugin-preference-3.5.0.jar"/>
+	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/AndroidConfigurationDomain"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/AndroidCommon"/>
+	<classpathentry kind="lib" path="/home/miles/workspace/AirCollection/Android-Configuration-Manager/AndroidConfigurationManager/libs/actionbarsherlock-plugin-preference-3.5.0.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
