@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite errors="0" failures="0" hostname="Yosemite" name="com.mb.android.preferences.reflection.ConfigMetadataReflectorSpec" tests="3" time="0.048" timestamp="2012-02-11T12:12:17">
-  <properties />
-  <testcase classname="com.mb.android.preferences.reflection.ConfigMetadataReflectorSpec" name="given a mockClass with a field with no annotation it should not be processed" time="0.022" />
-  <testcase classname="com.mb.android.preferences.reflection.ConfigMetadataReflectorSpec" name="given a mockClass I expect the type field to be processed" time="0.0090" />
-  <testcase classname="com.mb.android.preferences.reflection.ConfigMetadataReflectorSpec" name="as the identify I expect the id field not to be processed" time="0.0050" />
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
