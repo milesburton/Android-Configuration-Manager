@@ -1,5 +1,15 @@
+gen
+bin
+.idea
+classes
+target
+out
+build
 *.iml
 *.ipr
 *.iws
-.idea/
-
+*.log
+*.war
+.idea
+.project
+.classpath
