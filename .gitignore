@@ -1,0 +1,8 @@
+bin/**
+*.iml
+*.ipr
+*.iws
+.idea/
+ThirdParty/**
+ExampleProject
+

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite errors="0" failures="0" hostname="Yosemite" name="com.mb.android.preferences.domain.ConfigSpec" tests="3" time="0.014" timestamp="2012-02-11T12:12:18">
+  <properties />
+  <testcase classname="com.mb.android.preferences.domain.ConfigSpec" name="a clone of a config object should create a new, cloned object" time="0.0020" />
+  <testcase classname="com.mb.android.preferences.domain.ConfigSpec" name="a config object without a id or type should not be valid" time="0.0" />
+  <testcase classname="com.mb.android.preferences.domain.ConfigSpec" name="a config object with a id and is valid" time="0.0010" />
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
