@@ -27,9 +27,11 @@ public class UIPreferenceBuilder {
 
 		ConfigValueAction putEditorAction = new ConfigValueAction() {
 
+			@Override
 			public void process(Field field, ConfigMetadata configMetadata) {
 				ConfigDescription configDescription = getConfigDescription(field);
-				Preference preference = getPreferenceFor(config, configMetadata, configDescription);
+				Preference preference = getPreferenceFor(config,
+						configMetadata, configDescription);
 				populateDefaults(field, preference);
 				preferences.add(preference);
 			}
@@ -40,17 +42,27 @@ public class UIPreferenceBuilder {
 	}
 
 	private ConfigDescription getConfigDescription(Field field) {
-		ConfigDescription fieldDescription = (ConfigDescription) field.getAnnotation(ConfigDescription.class);
+		ConfigDescription fieldDescription = field
+				.getAnnotation(ConfigDescription.class);
 
 		if (fieldDescription == null)
 			throw new MissingAnnotationException();
 		return fieldDescription;
 	}
 
-	private Preference getPreferenceFor(Config config, ConfigMetadata configMetadata, ConfigDescription fieldDescription) {
-		String key = keyGenerator.createKey(config.getId(), configMetadata.id()); // this is wrong! shouldn't know about a key generator
+	private Preference getPreferenceFor(Config config,
+			ConfigMetadata configMetadata, ConfigDescription fieldDescription) {
+		String key = keyGenerator
+				.createKey(config.getId(), configMetadata.id()); // this is
+																	// wrong!
+																	// shouldn't
+																	// know
+																	// about a
+																	// key
+																	// generator
 
-		Preference preference = preferenceFactory.createPreference(configMetadata);
+		Preference preference = preferenceFactory
+				.createPreference(configMetadata);
 
 		preference.setKey(key);
 		preference.setTitle(fieldDescription.title());
@@ -66,7 +78,8 @@ public class UIPreferenceBuilder {
 	}
 
 	private void populateDefaults(Field field, ListPreference preference) {
-		ConfigOptions configOptions = (ConfigOptions) field.getAnnotation(ConfigOptions.class);
+		ConfigOptions configOptions = field
+				.getAnnotation(ConfigOptions.class);
 		if (configOptions == null)
 			return;
 

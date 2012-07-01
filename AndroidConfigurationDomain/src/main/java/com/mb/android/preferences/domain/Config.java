@@ -35,6 +35,7 @@ public abstract class Config implements Cloneable {
 
 	public abstract String getName();
 
+	@Override
 	public Object clone() {
 		Object clone = null;
 		try {

@@ -6,12 +6,14 @@ import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.view.View.OnTouchListener;
 
-public class CustomClickListener<T> implements OnTouchListener, OnClickListener, OnLongClickListener {
+public class CustomClickListener<T> implements OnTouchListener,
+		OnClickListener, OnLongClickListener {
 	private int position;
 	private OnCustomClickListener<T> callback;
 	private T payload;
 
-	public CustomClickListener(OnCustomClickListener<T> callback, int pos, T payload) {
+	public CustomClickListener(OnCustomClickListener<T> callback, int pos,
+			T payload) {
 		position = pos;
 		this.callback = callback;
 		this.payload = payload;

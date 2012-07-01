@@ -12,8 +12,10 @@ import com.actionbarsherlock.app.SherlockPreferenceActivity;
 import com.mb.android.preferences.domain.Config;
 import com.mb.android.preferences.manager.ConfigManager;
 
-public abstract class GenericPreferenceActivity extends SherlockPreferenceActivity {
-	//private final static String TAG = GenericPreferenceActivity.class.getCanonicalName();
+public abstract class GenericPreferenceActivity extends
+		SherlockPreferenceActivity {
+	// private final static String TAG =
+	// GenericPreferenceActivity.class.getCanonicalName();
 	public final static String ConfigCanonicalClassKey = "canonicalClass";
 	public final static String ConfigIdKey = "configId";
 	private final ConfigManager configManager;
@@ -27,7 +29,8 @@ public abstract class GenericPreferenceActivity extends SherlockPreferenceActivi
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		String configCanonicalClassName = getIntent().getStringExtra(ConfigCanonicalClassKey);
+		String configCanonicalClassName = getIntent().getStringExtra(
+				ConfigCanonicalClassKey);
 		getConfigClassFromIntent(configCanonicalClassName);
 
 		if (c.getId().equals("")) {
@@ -47,7 +50,8 @@ public abstract class GenericPreferenceActivity extends SherlockPreferenceActivi
 			configManager.saveConfig(c);
 		}
 
-		PreferenceScreen ps = getPreferenceManager().createPreferenceScreen(this);
+		PreferenceScreen ps = getPreferenceManager().createPreferenceScreen(
+				this);
 		setPreferenceScreen(ps);
 
 		PreferenceCategory preferenceCategory = new PreferenceCategory(this);
@@ -55,7 +59,8 @@ public abstract class GenericPreferenceActivity extends SherlockPreferenceActivi
 		ps.addPreference(preferenceCategory);
 
 		UIPreferenceBuilder preferenceBuilder = new UIPreferenceBuilder();
-		preferenceBuilder.setPreferenceFactory(new ActivityPreferenceFactory(this));
+		preferenceBuilder.setPreferenceFactory(new ActivityPreferenceFactory(
+				this));
 		List<Preference> prefs = preferenceBuilder.getPreferencesFor(c);
 
 		for (Preference preference : prefs)

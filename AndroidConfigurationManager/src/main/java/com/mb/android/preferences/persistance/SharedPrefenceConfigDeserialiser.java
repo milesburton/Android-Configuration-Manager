@@ -12,7 +12,8 @@ import com.mb.android.preferences.reflection.ConfigMetadataReflector.ConfigValue
 
 public class SharedPrefenceConfigDeserialiser implements ConfigDeserialiser {
 
-	private final String TAG = SharedPrefenceConfigDeserialiser.class.getCanonicalName();
+	private final String TAG = SharedPrefenceConfigDeserialiser.class
+			.getCanonicalName();
 
 	private ConfigMetadataReflector reflector = new ConfigMetadataReflector();
 	private SharedPreferences preferences;
@@ -22,11 +23,13 @@ public class SharedPrefenceConfigDeserialiser implements ConfigDeserialiser {
 		this.preferences = preferences;
 	}
 
+	@Override
 	public Config deserialise(final Config config, final String id) {
 		config.setId(id);
 
 		ConfigValueAction putEditorAction = new ConfigValueAction() {
 
+			@Override
 			public void process(Field field, ConfigMetadata fieldMetadata) {
 				Object value = getPreferenceValueForField(id, fieldMetadata);
 				if (value != null)
@@ -40,6 +43,7 @@ public class SharedPrefenceConfigDeserialiser implements ConfigDeserialiser {
 		return config;
 	}
 
+	@Override
 	public String getType(String id) {
 		return preferences.getString(keyGenerator.createTypeKey(id), "");
 	}
@@ -54,7 +58,8 @@ public class SharedPrefenceConfigDeserialiser implements ConfigDeserialiser {
 		}
 	}
 
-	private Object getPreferenceValueForField(String configId, ConfigMetadata fieldMetadata) {
+	private Object getPreferenceValueForField(String configId,
+			ConfigMetadata fieldMetadata) {
 
 		String key = keyGenerator.createKey(configId, fieldMetadata.id());
 		Object value = null;

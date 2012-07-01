@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
@@ -28,7 +27,9 @@ import com.mb.android.preferences.manager.OnConfigLoadedListener;
 import com.mb.android.ui.listeners.CustomClickListener;
 import com.mb.android.ui.listeners.OnCustomClickListener;
 
-public abstract class ConfigListActivity extends SherlockFragmentActivity implements OnCustomClickListener<Config>, OnClickListener {
+public abstract class ConfigListActivity extends SherlockFragmentActivity
+		implements OnCustomClickListener<Config>, OnClickListener {
+
 	private final static int BTN_ADD_NEW = 1337;
 
 	private final ConfigFilter filter;
@@ -56,7 +57,6 @@ public abstract class ConfigListActivity extends SherlockFragmentActivity implem
 		button.setText("Add new");
 		button.setOnClickListener(this);
 
-		// Fetch view and associate handlers
 		ListView lv = (ListView) findViewById(android.R.id.list);
 		lv.addFooterView(button);
 		lv.setAdapter(adapter);
@@ -65,9 +65,11 @@ public abstract class ConfigListActivity extends SherlockFragmentActivity implem
 	}
 
 	private List<Config> getConfigList() {
-		return new ArrayList<Config>(configManager.getConfigurationFor(filter).values());
+		return new ArrayList<Config>(configManager.getConfigurationFor(filter)
+				.values());
 	}
 
+	@Override
 	public void OnClick(View view, int position, Config providerConfig) {
 		if (view.getId() == R.id.toggle_default_icon) {
 
@@ -78,7 +80,8 @@ public abstract class ConfigListActivity extends SherlockFragmentActivity implem
 	}
 
 	@Override
-	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
+	public void onCreateContextMenu(ContextMenu menu, View v,
+			ContextMenuInfo menuInfo) {
 		onConfigContextMenu(menu, v, menuInfo);
 	}
 
@@ -89,33 +92,41 @@ public abstract class ConfigListActivity extends SherlockFragmentActivity implem
 		return true;
 	}
 
-	private class ProviderListAdapter extends BaseAdapter implements OnConfigLoadedListener {
+	private class ProviderListAdapter extends BaseAdapter implements
+			OnConfigLoadedListener {
 		private LayoutInflater mInflater;
 
 		public ProviderListAdapter() {
 			mInflater = LayoutInflater.from(ConfigListActivity.this);
 		}
 
+		@Override
 		public int getCount() {
 			return configList.size();
 		}
 
+		@Override
 		public Object getItem(int arg0) {
 			return configList.get(arg0);
 		}
 
+		@Override
 		public long getItemId(int arg0) {
 			return 0;
 		}
 
+		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			ViewHolder holder;
 			if (convertView == null) {
-				convertView = mInflater.inflate(R.layout.listview_row_preference_config, null);
-				convertView.setOnCreateContextMenuListener(ConfigListActivity.this);
+				convertView = mInflater.inflate(
+						R.layout.listview_row_preference_config, null);
+				convertView
+						.setOnCreateContextMenuListener(ConfigListActivity.this);
 				holder = new ViewHolder();
 				holder.title = (TextView) convertView.findViewById(R.id.title);
-				holder.toggleDefaultIcon = (ImageView) convertView.findViewById(R.id.toggle_default_icon);
+				holder.toggleDefaultIcon = (ImageView) convertView
+						.findViewById(R.id.toggle_default_icon);
 				convertView.setTag(holder);
 			} else {
 				holder = (ViewHolder) convertView.getTag();
@@ -123,15 +134,18 @@ public abstract class ConfigListActivity extends SherlockFragmentActivity implem
 
 			Config provider = (Config) getItem(position);
 
-			CustomClickListener<Config> handler = new CustomClickListener<Config>(ConfigListActivity.this, position, provider);
+			CustomClickListener<Config> handler = new CustomClickListener<Config>(
+					ConfigListActivity.this, position, provider);
 
 			holder.title.setText(provider.getName());
 			holder.toggleDefaultIcon.setOnClickListener(handler);
 
 			if (isDefaultConfig(provider)) {
-				holder.toggleDefaultIcon.setImageResource(android.R.drawable.star_on);
+				holder.toggleDefaultIcon
+						.setImageResource(android.R.drawable.star_on);
 			} else {
-				holder.toggleDefaultIcon.setImageResource(android.R.drawable.star_off);
+				holder.toggleDefaultIcon
+						.setImageResource(android.R.drawable.star_off);
 			}
 
 			convertView.setOnTouchListener(handler);
@@ -141,6 +155,7 @@ public abstract class ConfigListActivity extends SherlockFragmentActivity implem
 			return convertView;
 		}
 
+		@Override
 		public void configLoaded(Map<String, Config> configuration) {
 			configList = getConfigList();
 			notifyDataSetChanged();
@@ -153,14 +168,17 @@ public abstract class ConfigListActivity extends SherlockFragmentActivity implem
 		private ImageView toggleDefaultIcon;
 	}
 
+	@Override
 	public void OnTouch(View aView, int position, Config payload) {
 		selectedConfig = payload;
 	}
 
+	@Override
 	public void OnLongClick(View aView, int position, Config payload) {
 
 	}
 
+	@Override
 	public void onClick(View view) {
 		switch (view.getId()) {
 		case BTN_ADD_NEW:
@@ -179,6 +197,7 @@ public abstract class ConfigListActivity extends SherlockFragmentActivity implem
 
 	public abstract void onConfigDeleted(Config config);
 
-	public abstract void onConfigContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo);
+	public abstract void onConfigContextMenu(ContextMenu menu, View v,
+			ContextMenuInfo menuInfo);
 
 }

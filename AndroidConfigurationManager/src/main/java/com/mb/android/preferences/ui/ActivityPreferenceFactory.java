@@ -17,6 +17,7 @@ public class ActivityPreferenceFactory implements PreferenceFactory {
 		this.context = context;
 	}
 
+	@Override
 	public Preference createPreference(ConfigMetadata metadata) {
 		switch (metadata.type()) {
 		case String:
