@@ -1,4 +1,5 @@
 gen
+.gradle
 bin
 .idea
 classes

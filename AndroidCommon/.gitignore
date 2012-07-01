@@ -5,6 +5,7 @@ classes
 target
 out
 build
+.gradle
 *.iml
 *.ipr
 *.iws
