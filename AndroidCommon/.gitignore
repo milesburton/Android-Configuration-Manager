@@ -1,0 +1,16 @@
+gen
+bin
+.idea
+classes
+target
+out
+build
+.gradle
+*.iml
+*.ipr
+*.iws
+*.log
+*.war
+.idea
+.project
+.classpath

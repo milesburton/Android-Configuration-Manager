@@ -1,0 +1,43 @@
+apply plugin: 'groovy'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+
+sourceCompatibility = 1.6
+version = '1.0'
+
+sourceSets {
+    testCompile {
+        groovy {
+            srcDir file('src/test/groovy')
+        }
+    }
+}
+
+repositories {
+	mavenCentral()
+	mavenRepo(url: 'http://build.mnetcs.com:8081/artifactory/android-snapshot')
+}
+
+dependencies {
+   	groovy "org.codehaus.groovy:groovy-all:1.8.5"
+
+	compile 'com.google.android:android:2.3.3'
+	compile('com.mb.android.preferences:android-configuration-manager:1.0-SNAPSHOT')
+	{
+		changing = true
+	}
+
+
+
+
+	testCompile 	"org.spockframework:spock-core:0.5-groovy-1.8",
+			"junit:junit:4.10",
+			'org.gmock:gmock:0.8.2'
+}
+
+/* The test script helpers */
+test {
+    beforeTest { descriptor ->
+        logger.lifecycle("Running test: " + descriptor)
+    }
+}
