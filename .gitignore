@@ -4,5 +4,5 @@ bin/**
 *.iws
 .idea/
 ThirdParty/**
-ExampleProject
+ExampleProject/**
 
