@@ -4,8 +4,5 @@ bin/**
 *.iws
 .idea/
 ThirdParty/**
-<<<<<<< HEAD
 ExampleProject/**
-=======
->>>>>>> d97082793eb6c8f1aa2ce8fecbdb6347ea7c8b57
 
