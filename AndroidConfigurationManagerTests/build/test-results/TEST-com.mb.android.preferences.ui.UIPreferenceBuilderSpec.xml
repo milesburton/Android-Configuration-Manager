@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite errors="0" failures="0" hostname="Yosemite" name="com.mb.android.preferences.ui.UIPreferenceBuilderSpec" tests="1" time="0.585" timestamp="2012-02-11T12:12:18">
+  <properties />
+  <testcase classname="com.mb.android.preferences.ui.UIPreferenceBuilderSpec" name="Given a config return a preference list which represents each configurable field" time="0.578" />
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
