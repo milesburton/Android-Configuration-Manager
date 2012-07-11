@@ -26,6 +26,6 @@ dependencies {
 
 	testCompile "org.gmock:gmock:0.8.2"
 	testCompile "org.spockframework:spock-core:0.5-groovy-1.8"
-	testCompile "junit:junit-dep:4.8.2"
+	testCompile 'junit:junit-dep:4.10'
 }
 
