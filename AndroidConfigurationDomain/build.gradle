@@ -26,14 +26,6 @@ dependencies {
 
 	testCompile "org.gmock:gmock:0.8.2"
 	testCompile "org.spockframework:spock-core:0.5-groovy-1.8"
+	testCompile "junit:junit-dep:4.8.2"
 }
 
-uploadArchives {
-	repositories.mavenDeployer {
-		name = 'httpDeployer'
-		repository(url: "http://build.mnetcs.com:8081/artifactory/android-snapshot") {
-			authentication(userName: System.properties['artifactoryUserName'], password: System.properties['artifactoryPassword'])
-		}
-		pom.artifactId = artifactId
-	}
-}
