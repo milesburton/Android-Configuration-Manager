@@ -13,7 +13,7 @@ targetCompatibility = 1.6
 
 repositories {
     mavenCentral()
-    mavenRepo(url: 'http://build.mnetcs.com:8081/artifactory/android-snapshot')
+	mavenRepo(url: 'http://artifactory.milesburton.com/android-snapshot')
 	mavenRepo(url: 'http://r.jakewharton.com/maven/release')
 }
 buildscript {
@@ -46,14 +46,4 @@ repositories {
 // Configure the filtering of resources with properties from the Gradle's project scope (2)
 processResources {
   expand (project.properties)
-}
-
-uploadArchives {
-	repositories.mavenDeployer {
-		name = 'httpDeployer'
-		repository(url: "http://build.mnetcs.com:8081/artifactory/android-snapshot") {
-			authentication(userName: System.properties['artifactoryUserName'], password: System.properties['artifactoryPassword'])
-		}
-		pom.artifactId = artifactId
-	}
 }

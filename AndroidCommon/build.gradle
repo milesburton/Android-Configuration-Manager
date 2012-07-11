@@ -13,21 +13,11 @@ targetCompatibility = 1.5
 repositories {
 	//mavenLocal()
 	mavenCentral()
-	mavenRepo(url: 'http://build.mnetcs.com:8081/artifactory/android-snapshot')
+	mavenRepo(url: 'http://artifactory.milesburton.com/android-snapshot')
 }
 
 dependencies {
 	groovy "org.codehaus.groovy:groovy-all:1.8.5"
 	compile 'com.google.android:android:2.3.3'
             
-}
-
-uploadArchives {
-	repositories.mavenDeployer {
-		name = 'httpDeployer'
-		repository(url: "http://build.mnetcs.com:8081/artifactory/android-snapshot") {
-			authentication(userName: System.properties['artifactoryUserName'], password: System.properties['artifactoryPassword'])
-		}
-		pom.artifactId = artifactId
-	}
 }
