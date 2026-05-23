@@ -1,6 +1,6 @@
 Android Configuration Manager (ACM) – *Deprecated* 
 
-his project is deprecated and no longer actively maintained.** However, if you're nostalgic for the days of Android development with simplified configuration management, this README will help you understand how it worked back when it was relevant
+This project is deprecated and no longer actively maintained.** However, if you're nostalgic for the days of Android development with simplified configuration management, this README will help you understand how it worked back when it was relevant
 
 The **Android Configuration Manager (ACM)** was a lightweight library designed to simplify app configuration storage in Android. Instead of dealing with complex **SQLite**, **Shared Preferences**, or **file-based persistence**, ACM allowed developers to **store configuration settings as Java objects** – a sort of **Light Object Mapping (LOM)** for Android. ✨
 
